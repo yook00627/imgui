@@ -2344,16 +2344,14 @@ static void ImFontAtlasBuildRenderDefaultTexData(ImFontAtlas* atlas)
     atlas->TexUvWhitePixel = ImVec2((r.X + 0.5f) * atlas->TexUvScale.x, (r.Y + 0.5f) * atlas->TexUvScale.y);
 }
 
-const unsigned int FONT_ATLAS_AA_LINE_TEX_DATA_ID = 0x80010000;
-
 static void ImFontAtlasBuildRegisterAALineCustomRects(ImFontAtlas* atlas)
 {
     if ((atlas->Flags & ImFontAtlasFlags_NoAALines))
         return;
 
-    const int max_width = IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX; // The maximum line width we want to generate
     // The "max_width + 2" here is to give space for the end caps, whilst height (IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX+1) is to accommodate the fact we have a zero-width row
-    atlas->AALineRectId = atlas->AddCustomRectRegular(FONT_ATLAS_AA_LINE_TEX_DATA_ID, max_width + 2, IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX + 1);
+    const int max_width = IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX; // The maximum line width we want to generate
+    atlas->AALineRectId = atlas->AddCustomRectRegular(max_width + 2, IM_DRAWLIST_TEX_AA_LINES_WIDTH_MAX + 1);
 }
 
 static void ImFontAtlasBuildRenderAALinesTexData(ImFontAtlas* atlas)
